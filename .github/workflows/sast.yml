@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Semgrep Scan
     permissions:
-      security-events: write
+      security-events: write # Required to upload SARIF results
+      actions: read
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Semgrep
         uses: returntocorp/semgrep-action@v1
         with:
           config: p/owasp-top-ten
-         
-          publishArtifact: true
           generateSarif: "true"
