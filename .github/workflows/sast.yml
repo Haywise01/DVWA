@@ -19,6 +19,7 @@ jobs:
         with:
           config: p/owasp-top-ten
           generateSarif: "true"
+          outputFile: semgrep.sarif
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
