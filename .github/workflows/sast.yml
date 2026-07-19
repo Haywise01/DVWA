@@ -5,8 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Install Semgrep
+        run: pip install semgrep
+        
       - name: Semgrep
         run: semgrep scan --config p/owasp-top-ten --sarif --output results.sarif
+        
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
