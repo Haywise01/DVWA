@@ -13,14 +13,16 @@ jobs:
     permissions:
       security-events: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Semgrep
         uses: returntocorp/semgrep-action@v1
         with:
           config: p/owasp-top-ten
           generateSarif: "true"
+
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: semgrep.sarif
-          category: semgrep
