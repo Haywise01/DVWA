@@ -1,9 +1,15 @@
 name: SAST Scan
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
+    name: Semgrep Scan
     permissions:
       security-events: write
     steps:
@@ -12,8 +18,6 @@ jobs:
         uses: returntocorp/semgrep-action@v1
         with:
           config: p/owasp-top-ten
+         
+          publishArtifact: true
           generateSarif: "true"
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: semgrep.sarif
