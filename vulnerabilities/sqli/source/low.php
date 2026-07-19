@@ -52,5 +52,8 @@ if( isset( $_REQUEST[ 'Submit' ] ) ) {
 			break;
 	} 
 }
+// Insecure query for SAST testing
+$id = $_GET['id'];
+$query = "SELECT first_name, last_name FROM users WHERE user_id = " . $id;
 
 ?>
